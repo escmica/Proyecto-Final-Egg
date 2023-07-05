@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <link rel="stylesheet" href="/css/styleModuloUsuario.css">
+
+</head>
+
+<body>
+
+    <body>
+        <header th:replace="fragments/navbar"></header>
+    </body>
+
+    <main class="main__login">
+        <div class="avisos">
+
+            <form class="form" action="/" method="POST" id="registro__form" enctype="multipart/form-data">
+                <h2 class="form__title">Formulario de Registro</h2>
+
+                <div class="form__container">
+                    <div class="form__group">
+                        <input type="text" id="name" th:value="${nombre}" class="form__input" name="nombre"
+                            placeholder=" " required>
+                        <label for="name" class="form__label">Nombre</label>
+                        <span class="form__line"></span>
+                    </div>
+
+                    <div class="form__group">
+                        <input type="text" id="apellido" th:value="${apellido}" class="form__input" name="apellido"
+                            placeholder=" " required>
+                        <label for="apellido" class="form__label">Apellido</label>
+                        <span class="form__line"></span>
+                    </div>
+
+                    <div class="form__group">
+                        <input type="email" id="correo" th:value="${email}" class="form__input" name="email"
+                            placeholder=" " required>
+                        <label for="correo" class="form__label">Correo</label>
+                        <span class="form__line"></span>
+                    </div>
+
+                    <div class="form__group">
+                        <input type="file" id="imagen" class="form__input" name="archivo" placeholder=" ">
+                        <label for="iamgen" class="form__label">Imagen del perfil</label>
+                        <span class="form__line"></span>
+                    </div>
+
+                    <div class="form__group">
+                        <input type="password" id="password" class="form__input" name="password" placeholder=" "
+                            required>
+                        <label for="password" class="form__label">Contraseña</label>
+                        <span class="form__line"></span>
+                    </div>
+
+                    <div class="form__group">
+                        <input type="password" id="password2" class="form__input" name="password2" placeholder=" "
+                            required>
+                        <label for="password2" class="form__label">Confirmar Contraseña</label>
+                        <span class="form__line"></span>
+                    </div>
+
+                    <div class="form__group">
+                        <select name="roles" class="form__input" required>
+                            <option value="" hidden>
+                                SELECCIONE SU ROL
+                            </option>
+
+                            <option value="SOLICITANTE">
+                                SOLICITANTE
+                            </option>
+                            <option value="PROVEEDOR">
+                                PROVEEDOR
+                            </option>
+                        </select>
+                    </div>
+
+
+                    <div id="campo__proveedor__tel" class="form__group" hidden>
+                        <span class="form__line"></span>
+                    </div>
+
+                    <div id="campo__proveedor__prof" class="form__group" hidden>
+                        <span class="form__line"></span>
+                    </div>
+
+                    <div id="campo__proveedor__desc" class="form__group" hidden>
+                        <span class="form__line"></span>
+                    </div>
+
+                    <!--Aviso de errores y exito- comienzo-->
+                    <div th:if="${error}!=null" class="error">
+                        <div class="card-body">
+                            <h5 class="card-title">Error!</h5>
+                            <p class="card-text" th:text="${error}"></p>
+                        </div>
+                    </div>
+
+                    <div th:if="${exito}!=null" class="exito">
+                        <div class="card-body">
+                            <h5 class="card-title">Éxito!</h5>
+                            <p class="card-text" th:text="${exito}"></p>
+                        </div>
+                    </div>
+                </div>
+                <!--Aviso de errores y exito- final-->
+
+                <input type="submit" class="form__submit" value="Registrarse">
+        </div>
+
+        </form>
+
+    </main>
+
+    <script>
+
+        var select = document.querySelector("select[name='roles']");
+        var campoAdicionalTel = document.querySelector("#campo__proveedor__tel");
+        var campoAdicionalProf = document.querySelector("#campo__proveedor__prof");
+        var campoAdicionalDesc = document.querySelector("#campo__proveedor__desc");
+        var form = document.getElementById("registro__form");
+
+        // Agrega un evento onchange al select
+        select.addEventListener("change", function () {
+
+            // Si se seleccionó la opción "SOLICITANTE"
+            if (select.value === "SOLICITANTE") {
+                campoAdicionalTel.innerHTML = "";
+                campoAdicionalProf.innerHTML = "";
+                campoAdicionalDesc.innerHTML = "";
+
+                campoAdicionalTel.hidden = true;
+                campoAdicionalProf.hidden = true;
+                campoAdicionalDesc.hidden = true;
+
+                form.action = "/registroSoli";
+
+            } else if (select.value === "PROVEEDOR") {
+                // Crea un nuevo campo de texto
+                var nuevoCampoTel = document.createElement("div");
+                nuevoCampoTel.innerHTML =
+                    "<input type='text' id='contacto' name='contacto' class='form__input' placeholder=' ' required><label for='telefono' class='form__label'>Teléfono</label>";
+
+                var nuevoCampoProf = document.createElement("div");
+                nuevoCampoProf.innerHTML =
+                    "<select name='profesion' class='form__input' required> <option value='' hidden>SELECCIONE SU PROFESION</option> <option value='albanileria'>Albañil</option> <option value='carpinteria'>Carpintero</option> <option value='limpieza'>Limpiador</option> <option value='herreria'>Herrero</option> <option value='jardineria'>Jardinero</option> <option value='plomeria'>Plomero</option> </select>"
+
+                var nuevoCampoDesc = document.createElement("div");
+                nuevoCampoDesc.innerHTML =
+                    "<input type='text' id='descripcion' name='descripcion' class='form__input' placeholder=' ' required><label for='descripcion' class='form__label'>Descripcion</label>"
+                // Agrega el nuevo campo al contenedor de campos adicionales
+                campoAdicionalTel.appendChild(nuevoCampoTel);
+                campoAdicionalProf.appendChild(nuevoCampoProf);
+                campoAdicionalDesc.appendChild(nuevoCampoDesc);
+
+                campoAdicionalTel.hidden = false;
+                campoAdicionalProf.hidden = false;
+                campoAdicionalDesc.hidden = false;
+
+                form.action = "/registroP";
+            } else {
+                // Si se seleccionó otra opción, elimina todos los campos adicionales del contenedor
+                campoAdicionalTel.innerHTML = "";
+                campoAdicionalProf.innerHTML = "";
+                campoAdicionalDesc.innerHTML = "";
+
+                campoAdicionalTel.hidden = true;
+                campoAdicionalProf.hidden = true;
+                campoAdicionalDesc.hidden = true;
+
+                form.action = "/";
+            }
+
+
+        });
+
+    </script>
+</body>
+
+</html>

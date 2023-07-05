@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/styleCalificacion.css">
+    <title>Reseña</title>
+
+</head>
+
+<body>
+
+    <body>
+        <header th:replace="fragments/navbar"></header>
+    </body>
+
+    <main class="bodyCalif">
+
+
+        <div th:if="${error}!=null" class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Error !!!</h5>
+                <p class="card-text" th:text="${error}"></p>
+            </div>
+        </div>
+
+        <div th:if="${exito}!=null" class="card text-white bg-success mb-3" style="max-width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Éxito</h5>
+                <p class="card-text" th:text="${exito}"></p>
+            </div>
+        </div>
+
+
+        <div class="wrapper">
+            <h3>Dar calificacion</h3>
+            <form th:object="${calificacion}" th:action="@{/calificacion/calificar/__${calificacion.id}__}"
+                method="POST">
+                <input hidden th:value="${id}" name="id">
+
+                <span type="number" class="rating" name="" th:value="${calificacion.puntucion}">
+
+                    <input id="radio1" th:field="*{puntucion}" type="radio" name="estrellas" value="1">
+                    <label for="radio1"><i class='bx bx-star star' style="--i: 0;"></i></label>
+
+                    <input id="radio2" th:field="*{puntucion}" type="radio" name="estrellas" value="2">
+                    <label for="radio2"><i class='bx bx-star star' style="--i: 1;"></i></i></label>
+
+                    <input id="radio3" th:field="*{puntucion}" type="radio" name="estrellas" value="3">
+                    <label for="radio3"><i class='bx bx-star star' style="--i: 2;"></i></label>
+
+                    <input id="radio4" th:field="*{puntucion}" type="radio" name="estrellas" value="4">
+                    <label for="radio4"><i class='bx bx-star star' style="--i: 3;"></i></label>
+
+                    <input id="radio5" th:field="*{puntucion}" type="radio" name="estrellas" value="5">
+                    <label for="radio5"><i class='bx bx-star star' style="--i: 4;"></i></label>
+
+                </span>
+
+                <textarea name="resenia" cols="30" rows="5" th:value="${calificacion.resenia}"
+                    placeholder="Deja tu reseña acá" required></textarea>
+                <div class="btn-group">
+                    <input type="submit" class="btn submit" value="Calificar">
+                    <input class="btn cancel" value="Cancelar">
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+    <script>
+        const allStar = document.querySelectorAll('.rating .star')
+        const ratingValue = document.querySelector('.rating input')
+
+        allStar.forEach((item, idx) => {
+            item.addEventListener('click', function () {
+                let click = 0
+                ratingValue.value = idx + 1
+
+                allStar.forEach(i => {
+                    i.classList.replace('bxs-star', 'bx-star')
+                    i.classList.remove('active')
+                })
+                for (let i = 0; i < allStar.length; i++) {
+                    if (i <= idx) {
+                        allStar[i].classList.replace('bx-star', 'bxs-star')
+                        allStar[i].classList.add('active')
+                    } else {
+                        allStar[i].style.setProperty('--i', click)
+                        click++
+                    }
+                }
+            })
+        })
+    </script>
+
+</body>
+
+</html>

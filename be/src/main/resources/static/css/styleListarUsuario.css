@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root {
+    --blanco: #ffffff;
+    --primario: #1d3557;
+    --secundario: #457b9d;
+    --terciario: #a8dadc;
+    --cuaternario: #f1faee;
+    --quinario: #e63946;
+    --negro: #000000;
+    --secundario2: hwb(203 27% 38% / 0.203); 
+  }
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.main__listar1{
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    margin-top: 70px;
+}
+
+.div__listar{
+    width: 100%;
+}
+
+
+.table__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    background-color: var(--cuaternario);
+}
+
+.table__header p{
+    color: var(--secundario);
+}
+
+.btn__listar{
+    outline: none;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 5px;
+    color: var(--cuaternario);
+}
+
+.a__listar{
+    text-decoration: none;
+    color: var(--cuaternario);
+}
+
+.td__listar button:nth-child(1){
+    background-color: var(--secundario);
+}
+
+.td__listar button:nth-child(2){
+    background-color: var(--secundario);
+}
+
+.td__listar button:nth-child(3){
+    background-color: var(--quinario);
+}
+
+.añadir__usuario{
+    padding: 10px 20px;
+    color: var(--cuaternario);
+    background-color: var(--secundario);
+}
+
+.input__listar{
+    padding: 10px 20px;
+    margin: 0 10px;
+    outline: none;
+    border: 1px solid var(--secundario);
+    border-radius: 6px;
+    color: var(--secundario);
+}
+
+.table__section{
+    height: 700px;
+    overflow: auto;
+}
+
+.table__listar{
+    width: 100%;
+    table-layout: fixed;
+    min-width: 900px;
+    border-collapse: collapse;
+}
+
+.thead__listar th{
+    position: sticky;
+    top: 0;
+    background-color: var(--cuaternario);
+    color: var(--secundario);
+    font-size: 15px;
+}
+.acciones {
+    width: 250px;
+
+}
+.img {
+    width: 125px;
+}
+.id{
+    width: 150px;
+}
+
+.th__listar, .td__listar{
+    
+    border-bottom: 1px solid var(--cuaternario);
+    padding: 10px 10px;
+    word-break: break-all;
+    text-align: center;
+}
+
+.td__listar img{
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 5px solid var(--terciario);
+}
+
+.tr__listar:hover td{
+    color: var(--secundario);
+    
+    background-color: var(--cuaternario);
+}
+
+::placeholder{
+    color: var(--secundario);
+}
+
+::-webkit-scrollbar{
+    height: 5px;
+    width: 5px;
+}
+
+::-webkit-scrollbar-track{
+    box-shadow: 5px 5px 15px gray;
+}
+
+::-webkit-scrollbar-thumb{
+    box-shadow: 5px 5px 15px gray;
+}
+
+
+.rechazar{
+    background-color: var(--quinario)!important;
+}
+.botones {
+    display: flex;
+    justify-content: center;
+}

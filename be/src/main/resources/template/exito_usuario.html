@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Registro exitoso</title>
+  <link rel="stylesheet" href="/css/styleExito.css">
+  
+</head>
+
+<body>
+  <body>
+    <header th:replace="fragments/navbar"></header>
+  </body>
+  
+
+  <main class="main__exito">
+    <div class="container__exito">
+      <div class="popup">
+        <img src="/img/tick.png">
+        <h2>¡Gracias por registrarte!</h2>
+        <p>Sus datos han sido enviados con exito</p>
+        <a th:href="@{/}">Volver al inicio</a>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

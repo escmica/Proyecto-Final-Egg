@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/css/styleConfigPerfil.css">
+</head>
+
+
+<body>
+
+    <body>
+        <header th:replace="fragments/navbar"></header>
+    </body>
+
+
+    <div id='settings' ontouchstart>
+        <input checked class='nav' name='nav' type='radio'>
+        <span class='nav'>Perfil</span>
+        <input class='nav' name='nav' type='radio'>
+        <span class='nav'>Cuenta</span>
+        <input class='nav' name='nav' type='radio'>
+        <span class='nav'>Privacidad</span>
+        <input class='nav' name='nav' type='radio'>
+        <span class='nav'>Avanzado</span>
+        <main class='content'>
+            <section id='profile'>
+                <form th:action="@{/editar/{id}(id=${usuarios.id})}" method="POST" enctype="multipart/form-data">
+
+                    <ul>
+
+
+                        <li class='large padding avatar'>
+                            <span>
+                                <img th:src="@{/imagen/perfil/__${usuarios.id}__}">
+                            </span>
+                            <div>
+                                <div>
+                                    <h1 th:text="${usuarios.nombre} + ' ' + ${usuarios.apellido}">
+                                    </h1>
+                                </div>
+                                <fieldset class='material-button'>
+                                    <div>
+                                        <input type="file" id="imagen" class="form__input" name="archivo"
+                                            placeholder="Cambiar foto">
+                                    </div>
+                                </fieldset>
+
+                            </div>
+                        </li>
+                        <li>
+                            <fieldset class='material'>
+                                <div>
+                                    <input required type='text' name='nombre' th:value='${usuarios.nombre}'>
+                                    <label>Nombre</label>
+                                    <hr>
+                                </div>
+                            </fieldset>
+                        </li>
+                        <li>
+                            <fieldset class='material'>
+                                <div>
+                                    <input required type="text" name="apellido" th:value="${usuarios.apellido}" />
+                                    <label>Apellido</label>
+                                    <hr>
+                                </div>
+                            </fieldset>
+                        </li>
+
+                        <li>
+                            <fieldset class='material'>
+                                <div>
+                                    <input required type="text" name="email" th:value="${usuarios.email}" />
+                                    <label>Email</label>
+                                    <hr>
+                                </div>
+                            </fieldset>
+                        </li>
+
+                        <li sec:authorize="hasRole('PROVEEDOR')">
+                            <fieldset class='material'>
+                                <div>
+                                    <input required type='text' name="contacto" th:value='${usuarioP.contacto}'>
+                                    <label>Telefono</label>
+                                    <hr>
+                                </div>
+                            </fieldset>
+                        </li>
+
+                        <li sec:authorize="hasRole('PROVEEDOR')">
+                            <fieldset class='material'>
+                                <div>
+                                    <input required type='text' name="descripcion" th:value='${usuarioP.descripcion}'>
+                                    <label>Descripcion</label>
+                                    <hr>
+                                </div>
+                            </fieldset>
+                        </li>
+
+                        <li sec:authorize="hasRole('PROVEEDOR')">
+                            <fieldset class='material'>
+                                <div>
+                                    <input required type='text' name="profesion" th:value='${usuarioP.profesion}'>
+                                    <label>Profesión</label>
+                                    <hr>
+                                </div>
+                            </fieldset>
+                        </li>
+
+                        <li class='large padding'>
+                            <fieldset class='material-button center'>
+                                <div>
+                                    <input class='save' type='submit' value='Guardar'>
+                                </div>
+                            </fieldset>
+                        </li>
+                    </ul>
+                </form>
+            </section>
+            <section id='account'>
+                <form  th:action="@{/editarC/{id}(id=${usuarios.id})}" method="POST">
+                    <ul>                        
+                        <li>
+                            <fieldset class='material'>
+                                <div>
+                                    <input required type="password"  name="Actual" autocomplete="off">
+                                    <label>Contraseña Actual</label>
+                                    <hr>
+                                </div>
+                            </fieldset>
+                        </li>
+                        <li>
+                            <fieldset class='material'>
+                                <div>
+                                    <input required type="password"  name="password" th:field="${usuarios.password}"  autocomplete="off">
+                                    <label>Nueva contraseña</label>
+                                    <hr>
+                                </div>
+                            </fieldset>
+                        </li>
+                        <li>
+                            <fieldset class='material'>
+                                <div>
+                                    <input required type='password' name="password2" autocomplete="off">
+                                    <label>Confirmar contraseña</label>
+                                    <hr>
+                                </div>
+                            </fieldset>
+                        </li>
+                        <!--
+                        <li class='padding'>
+                                <fieldset class='material-button'>
+                                        <div>
+                                                <button class='connect gh connected'>
+                                                        <span>Unlink Github Account</span>
+                                                </button>
+                                        </div>
+                                </fieldset>
+                        </li>
+                        <li class='padding'>
+                                <fieldset class='material-button'>
+                                        <div>
+                                                <button class='connect tw'>
+                                                        <span>Link Twitter Account</span>
+                                                </button>
+                                        </div>
+                                </fieldset>
+                        </li>
+                        <li class='padding'>
+                                <fieldset class='material-button'>
+                                        <div>
+                                                <button class='connect fb'>
+                                                        <span>Link Facebook Account</span>
+                                                </button>
+                                        </div>
+                                </fieldset>
+                        </li>
+                        <li class='padding'>
+                                <fieldset class='material-button'>
+                                        <div>
+                                                <button class='connect li'>
+                                                        <span>Link LinkedIn Account</span>
+                                                </button>
+                                        </div>
+                                </fieldset>
+                        </li>
+                        -->
+                        <li class='large padding'>
+                            <fieldset class='material-button center'>
+                                <div>
+                                    <input class='save' type='submit' value='Guardar'>
+                                </div>
+                            </fieldset>
+                        </li>
+                    </ul>
+                </form>
+            </section>
+
+            <section class='upcoming' id='privacy'>
+                <h1>Coming&nbsp;soon!</h1>
+            </section>
+            <section class='upcoming' id='advanced'>
+                <h1>Coming&nbsp;soon!</h1>
+            </section>
+        </main>
+    </div>
+
+
+</body>
+
+</html>

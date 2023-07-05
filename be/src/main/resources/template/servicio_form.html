@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Form</title>
+    <link rel="stylesheet" href="/css/styleContactForm.css" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <body>
+      <header th:replace="fragments/navbar"></header>
+    </body>
+
+    <body class="bodyService">
+      <
+      <div class="avisos">
+        <!--Aviso de errores y exito- comienzo-->
+        <div th:if="${error}!=null" class="error">
+          <div class="card-body">
+            <h5 class="card-title">Error !!!</h5>
+            <p class="card-text" th:text="${error}"></p>
+          </div>
+        </div>
+
+        <div th:if="${exito}!=null" class="exito">
+          <div class="card-body">
+            <h5 class="card-title">Éxito</h5>
+            <p class="card-text" th:text="${exito}"></p>
+          </div>
+        </div>
+      </div>
+      <!--Aviso de errores y exito- final-->
+      <div class="container">
+        <span class="big-circle"></span>
+        <img src="/img/shape.png" class="square" alt="" />
+        <div class="form">
+          <div class="contact-info">
+            <h3 class="title">Informacion del proveedor</h3>
+
+                    <div class="descripProv">
+                        <h3 class="h3Service">Descripcion del proveedor: <p class="text"
+                                th:text="${proveedor.descripcion}"></p>
+                        </h3>
+                    </div>
+                    <div>
+                        <h3 class="h3Service">Telefono del proveedor: <p class="text"
+                                th:text="${proveedor.contacto}"></p>
+                        </h3>
+                    </div>
+                    <div class="imageDiv">
+                        <img th:src="@{/imagen/perfil/__${proveedor.id}__}" alt="" class="imageService">
+                    </div>
+                    <div class="infoProv">
+                        <h3 class="h3Service">Nombre: <p class="text" th:text="${proveedor.nombre}"></p>
+                        </h3>
+                        <h3 class="h3Service">Apellido: <p class="text" th:text="${proveedor.apellido}"></p>
+                        </h3>
+                    </div>
+
+                </div>
+
+          <div class="contact-form">
+            <span class="circle one"></span>
+            <span class="circle two"></span>
+
+                    <form action="/servicio/solicitar/__${proveedor.id}__" method="POST" class="formService"
+                        autocomplete="off">
+                        <h3 class="title">Contactar</h3>
+                        <div class="input-container">
+                            <input type="text" name="name" class="input" readonly
+                                th:value="${session.usuariosession.nombre} + ' ' + ${session.usuariosession.apellido}" />
+                            <label for="">Nombre y Apellido</label>
+                        </div>
+                        <div class="input-container">
+                            <input type="email" name="email" class="input" readonly
+                                th:value="${session.usuariosession.email}" />
+                            <label for="">Correo</label>
+                        </div>
+                        <div class="input-container textarea">
+                            <textarea name="descripcion" class="input" required></textarea>
+                            <label for="">Descripcion</label>
+                        </div>
+
+              <input
+                hidden
+                th:value="${session.usuariosession.id}"
+                name="id_solicitante"
+              />
+              <input hidden th:value="${proveedor.id}" name="id_proveedor" />
+              <input type="submit" value="Solicitar" class="btnService" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </body>
+  </body>
+</html>

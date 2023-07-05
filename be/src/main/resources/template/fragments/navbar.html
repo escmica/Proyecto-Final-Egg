@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    |   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css"
+              integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="/css/styleNavbar.css">
+
+        <title>Responsive Navbar</title>
+
+
+    </head>
+
+    <body class="body__nav">
+
+        <header class="header__nav">
+            <a th:href="@{/}" class="logo__nav a__nav">
+                <i class="ri-home-heart-fill"></i>
+                <span>HomeRepair</span>
+            </a>
+
+            <ul class="navbar">
+                <li class="li__nav"><a th:href="@{/}" href="#Inicio" class="active a__nav">Inicio</a></li>
+                <li class="li__nav"><a href="#Nosotros" sec:authorize="!hasRole('ADMIN')" class="a__nav">Nosotros</a>
+                </li>
+                <li class="li__nav"><a href="#Servicios" sec:authorize="!hasRole('ADMIN')" class="a__nav">Servicios</a></li>
+                <li class="li__nav"><a th:href="@{/admin/usuarios}" sec:authorize="hasRole('ADMIN')"
+                                       class="a__nav">Usuarios</a>
+                </li>
+            </ul>
+
+
+        <div class="main__nav">
+            <a th:href="@{/login}" th:if="${session.usuariosession == null}" class="user__nav a__nav"><i
+                    class="ri-user-fill"></i>
+                Ingresar
+            </a>
+            <a th:href="@{/registrar}" th:if="${session.usuariosession == null}" class="a__nav">Registrarse</a>
+            <a th:href="@{/proveedor/solicitudes/__${session.usuariosession.id}__}"
+                th:if="${session.usuariosession != null}" sec:authorize="hasRole('PROVEEDOR')"
+                class="user__nav a__nav"><i class="ri-notification-3-line"></i>
+                Solicitudes
+            </a>
+            <a th:href="@{/solicitante/inicio/calificar/__${session.usuariosession.id}__}"
+                th:if="${session.usuariosession != null}" sec:authorize="hasRole('SOLICITANTE')"
+                class="user__nav a__nav"><i class="ri-star-fill"></i>
+                Calificar
+            </a>
+
+
+                <nav class="nav__nav" th:if="${session.usuariosession != null}">
+                    <img th:src="@{/imagen/perfil/__${session.usuariosession.id}__}" class="user__pic" id="user__pic">
+
+                    <div class="sub__menu__wrap" id="subMenu">
+                        <div class="sub__menu">
+                            <div class="user__info">
+                                <img th:src="@{/imagen/perfil/__${session.usuariosession.id}__}">
+                                <h2 th:text="${session.usuariosession.nombre} + ' ' + ${session.usuariosession.apellido} ">
+                                </h2>
+                            </div>
+                            <hr>
+
+                            <a href="#" class="sub__menu__link">
+                                <img src="/img/user.png">
+                                <p>Perfil</p>
+                                <span><i class="ri-arrow-right-s-line"></i></span>
+                            </a>
+
+
+                            <a th:href="@{/config/__${session.usuariosession.id}__}"  class="sub__menu__link" >
+
+                                <img src="/img/settings.png">
+                                <p>Configuracion</p>
+                                <span><i class="ri-arrow-right-s-line"></i></span>
+                            </a>
+
+
+                            <a href="#" class="sub__menu__link">
+                                <img src="/img/question.png">
+                                <p>Ayuda</p>
+                                <span><i class="ri-arrow-right-s-line"></i></span>
+                            </a>
+
+                            <a th:href="@{/logout}" class="sub__menu__link">
+                                <img src="/img/logout.png">
+                                <p>Cerrar Sesion</p>
+                                <span><i class="ri-arrow-right-s-line"></i></span>
+                            </a>
+
+                        </div>
+                    </div>
+                </nav>
+
+                <div class="bx bx-menu" id="menu-icon"></div>
+
+            </div>
+        </header>
+
+        <script>
+            let subMenu = document.getElementById("subMenu");
+            let userPic = document.querySelector("#user__pic");
+
+            userPic.onclick = () => {
+            event.stopPropagation();
+            subMenu.classList.toggle("open__menu");
+            }
+
+
+        document.addEventListener('click', (event) => {
+
+            const isClickInsideSubMenu = subMenu.contains(event.target);
+            const isClickInsideUserPic = userPic.contains(event.target);
+
+            if (!isClickInsideSubMenu && !isClickInsideUserPic && subMenu.classList.contains("open__menu")) {
+
+                subMenu.classList.remove("open__menu");
+            }
+        });
+    </script>
+
+    <script type="text/javascript" src="js/script.js"></script>
+    <script>
+        let menu = document.querySelector('#menu-icon');
+        let navbar = document.querySelector('.navbar');
+
+        menu.onclick = () => {
+            event.stopPropagation();
+            menu.classList.toggle('bx-x');
+            navbar.classList.toggle('open');
+        }
+
+        document.addEventListener('click', (event) => {
+            // Comprueba si el elemento clickeado está dentro del menú
+            const isClickInsideMenu = navbar.contains(event.target);
+
+            // Si el clic es fuera del menú, ciérralo
+            if (!isClickInsideMenu && navbar.classList.contains('open')) {
+                menu.classList.remove('bx-x');
+                navbar.classList.remove('open');
+            }
+        });
+    </script>
+
+
+    </body>
+
+</html>

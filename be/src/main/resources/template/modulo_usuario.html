@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/styleModuloUsuario.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Modulo Usuario</title>
+</head>
+
+<body>
+
+    <body>
+        <header th:replace="fragments/navbar"></header>
+    </body>
+
+    <main class="main__login">
+
+        <form class="form" th:action="@{/admin/editar/__${usuario.id}__}" th:object="${usuario}" method="POST" id="registro__form">
+
+            <h2 class="form__title">Modulo Usuario</h2>
+            <input hidden th:value= "${id}" name="id">
+            <div class="form__container">
+                <div class="form__group">
+                    <input type="text" th:field="*{nombre}" id="name" class="form__input" placeholder=" ">
+                    <label for="name" class="form__label">Nombre</label>
+                    <span class="form__line"></span>
+                </div>
+                
+                <div class="form__group">
+                    <input type="text" th:field="*{apellido}" id="apellido" class="form__input" placeholder=" ">
+                    <label for="apellido" class="form__label">Apellido</label>
+                    <span class="form__line"></span>
+                </div>
+
+                <div class="form__group">
+                    <input type="email" th:field="*{email}" id="correo" class="form__input" placeholder=" ">
+                    <label for="correo" class="form__label">Correo</label>
+                    <span class="form__line"></span>
+                </div>
+
+                <div class="form__group">
+                    <input type="text" th:field="*{password}" id="password" class="form__input" placeholder=" ">
+                    <label for="password" class="form__label">Contraseña</label>
+                    <span class="form__line"></span>
+                </div>
+                
+                <div class="form__group">
+                    <input type="password" th:field="*{password2}" id="password2" class="form__input" placeholder=" ">
+                    <label for="password2" class="form__label">Confirmar Contraseña</label>
+                    <span class="form__line"></span>
+                </div>
+
+                <div class="form__group">
+                    <select name="roles" class="form__input" required>
+                        <option value="">
+                            SELECCIONE EL ROL
+                        </option>
+                        <option value="SOLICITANTE">
+                            SOLICITANTE
+                        </option>
+                        <option value="PROVEEDOR">
+                            PROVEEDOR
+                        </option>
+                    </select>
+                </div>
+
+                <div id="campo__proveedor__tel" class="form__group">
+                    <span class="form__line"></span>
+                </div>
+
+                <div id="campo__proveedor__prof" class="form__group">
+                    <span class="form__line"></span>
+                </div>
+
+                <div id="campo__proveedor__desc" class="form__group">
+                    <span class="form__line"></span>
+                </div>
+
+                <input type="submit" class="form__submit" value="Guardar">
+            </div>
+
+        </form>
+    </main>
+
+    <script>
+        var select = document.querySelector("select[name='roles']");
+        var campoAdicionalTel = document.querySelector("#campo__proveedor__tel");
+        var campoAdicionalProf = document.querySelector("#campo__proveedor__prof");
+        var campoAdicionalDesc = document.querySelector("#campo__proveedor__desc");
+        var form = document.getElementById("registro__form");
+
+        // Agrega un evento onchange al select
+        select.addEventListener("change", function () {
+
+            // Si se seleccionó la opción "SOLICITANTE"
+            if (select.value === "SOLICITANTE") {
+                select.setAttribute('th:field', '*{rol}');
+
+                campoAdicionalTel.innerHTML = "";
+                campoAdicionalProf.innerHTML = "";
+                campoAdicionalDesc.innerHTML = "";
+
+            } else if (select.value === "PROVEEDOR") {
+                select.setAttribute('th:field', '*{rol}');
+
+                // Crea un nuevo campo de texto
+                var nuevoCampoTel = document.createElement("div");
+                nuevoCampoTel.innerHTML =
+                    "<input type='text' id='contacto' th:field='*{contacto}' name='contacto' class='form__input' placeholder=' ' required><label for='contacto' class='form__label'>Teléfono</label>";
+
+                var nuevoCampoProf = document.createElement("div");
+                nuevoCampoProf.innerHTML =
+                    "<input type='text' id='profesion' th:field='*{profesion}' name='profesion' class='form__input' placeholder=' ' required><label for='profesion' class='form__label'>Profesion (Albañil, Herrero, etc)</label>"
+
+                var nuevoCampoDesc = document.createElement("div");
+                nuevoCampoDesc.innerHTML =
+                    "<input type='text' id='descripcion' th:field='*{descripcion}' name='descripcion' class='form__input' placeholder=' ' required><label for='descripcion' class='form__label'>Descripcion</label>"
+                // Agrega el nuevo campo al contenedor de campos adicionales
+                campoAdicionalTel.appendChild(nuevoCampoTel);
+                campoAdicionalProf.appendChild(nuevoCampoProf);
+                campoAdicionalDesc.appendChild(nuevoCampoDesc);
+
+            } else {
+                select.setAttribute('th:field', '*{rol}');
+
+                // Si se seleccionó otra opción, elimina todos los campos adicionales del contenedor
+                campoAdicionalTel.innerHTML = "";
+                campoAdicionalProf.innerHTML = "";
+                campoAdicionalDesc.innerHTML = "";
+            }
+
+
+        });
+    </script>
+</body>
+
+</html>

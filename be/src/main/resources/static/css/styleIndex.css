@@ -1,0 +1,162 @@
+/* Globales */
+:root {
+  --blanco: #ffffff;
+  --primario: #1d3557;
+  --secundario: #457b9d;
+  --terciario: #a8dadc;
+  --cuaternario: #f1faee;
+  --quinario: #e63946;
+  --negro: #000000;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+.body {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  font-family: sans-serif;
+  background: var(--blanco);
+}
+
+/* Header */
+
+.header {
+  padding: 65px;
+  color: var(--negro);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh !important;
+}
+
+.title {
+  margin-bottom: 40px;
+  font-size: 60px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--negro);
+}
+
+.parrafo {
+  margin-bottom: 40px;
+  font-size: 18px;
+  color: var(--negro);
+  padding: 0 100px;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.logo {
+  width: 300px;
+  height: 300px;
+  filter: brightness(1.1);
+  mix-blend-mode: multiply;
+}
+
+.box-container {
+  display: block;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.button {
+  background: var(--secundario);
+  outline: none;
+  border: none;
+  color: var(--blanco);
+  padding: 8px 22px;
+  border-radius: 20px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  box-shadow: 5px 5px 15px gray;
+}
+.button:hover {
+  color: var(--primario);
+}
+@media (max-width: 768px) {
+  .title {
+    margin-bottom: 0;
+    font-size: 40px;
+  }
+}
+
+/* nosotros */
+
+.nosotros {
+  width: 90%;
+  background-color: var(--terciario);
+  filter: brightness(1.35);
+  box-shadow: 5px 5px 15px gray;
+  margin: auto;
+  border-radius: 15px ;
+}
+/* section de servicios */
+
+
+.section {
+  display: flex;
+  width: 1300px;
+  height: 350px;
+}
+.section .img {
+  width: 0px;
+  flex-grow: 1;
+  object-fit: cover;
+  opacity: 0.8;
+  transition: 0.5s ease;
+}
+.section .img:hover {
+  cursor: crosshair;
+  width: 500px;
+  opacity: 1;
+  filter: contrast(120%);
+}
+
+/* footer */
+footer {
+  background-color: var(--terciario);
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+  font-size: 16px;
+
+  filter: brightness(1.35);
+  box-shadow: 5px 5px 15px gray;
+}
+
+
+/* errores */
+
+.avisos{
+  margin-top: 75px;
+  width: 100%;
+}
+
+.error{
+  width: 100%;
+  background-color: var(--quinario);
+  color: var(--cuaternario);
+  font-weight: 400;
+  font-size: 22px;
+}
+
+.exito {
+  width: 100%;
+  background-color: var(--terciario);
+  color: var(--cuaternario);
+  font-weight: 400;
+  font-size: 22px;
+}

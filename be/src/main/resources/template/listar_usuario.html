@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de usuarios</title>
+    <link rel="stylesheet" href="/css/styleListarUsuario.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+
+    <body>
+        <header th:replace="fragments/navbar"></header>
+    </body>
+
+    <main class="main__listar1">
+        <div class="div__listar">
+            <div class="table__header">
+                <p>Lista de Usuarios</p>
+                <form>
+                    <div>
+                        <input type="text" class="input__listar" placeholder="Filtrar" name="palabraClave"
+                            id="palabraClave" th:value="${palabraClave}">
+                        <input type="submit" class="añadir__usuario btn__listar" value="Buscar">
+                        &nbsp;&nbsp;
+                        <input type="button" class="añadir__usuario btn__listar" value="Limpiar"
+                            onclick="limpiarCampos()">
+                    </div>
+                </form>
+                <div>
+                    <a th:href="@{/admin/new}" class="a__listar">
+                        <button class="añadir__usuario btn__listar">
+                            Nuevo Usuario
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <div class="table__section">
+                <table class="table__listar">
+                    <thead class="thead__listar">
+                        <tr>
+                            <th class="th__listar id">ID</th>
+                            <th class="th__listar img">IMG</th>
+                            <th class="th__listar">Nombre</th>
+                            <th class="th__listar">Apellido</th>
+                            <th class="th__listar">Correo</th>
+                            <th class="th__listar">Rol</th>
+                            <th class="th__listar acciones">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody th:each="user : ${usuarios}">
+                        <tr class="tr__listar">
+                            <td class="td__listar" th:text="${user.id}"></td>
+                            <td class="td__listar"><img th:if="${user.imagen != null}"
+                                    th:src="@{/imagen/perfil/__${user.id}__}"></td>
+                            <td class="td__listar" th:text="${user.nombre}"></td>
+                            <td class="td__listar" th:text="${user.apellido}"></td>
+                            <td class="td__listar" th:text="${user.email}"></td>
+                            <td class="td__listar" th:text="${user.rol}"></td>
+                            <td class="td__listar">
+                                <div class="botones">
+                                <button class="btn__listar">
+                                    <a th:href="@{/admin/modificarRol/__${user.id}__}" class="a__listar">
+                                        Cambiar Rol
+                                    </a>
+                                </button>
+                                <button class="btn__listar">
+                                    <a th:href="@{/admin/editar/}+${user.id}" class="a__listar">
+                                        Editar
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                </button>
+                                <button class="btn__listar">
+                                    <a th:href="@{/admin/eliminar/}+${user.id}" class="a__listar"
+                                        onclick="return confirm('¿Estás seguro que deseas eliminar este usuario?')">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </button>
+                            </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script type="text/javascript">
+        function limpiarCampos() {
+            window.location = '/admin/usuarios';
+        }
+
+    </script>
+    <script src="https://kit.fontawesome.com/6da589b235.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

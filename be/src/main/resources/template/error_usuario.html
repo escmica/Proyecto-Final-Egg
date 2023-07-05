@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Registro no exitoso</title>
+  <link rel="stylesheet" href="/css/styleError.css">
+  
+</head>
+
+<body>
+  <body>
+    <header th:replace="fragments/navbar"></header>
+  </body>
+  
+
+  <main class="main__error">
+            <!--Aviso de errores y exito- comienzo-->
+            <div th:if="${error}!=null" class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Error !!!</h5>
+                  <p class="card-text" th:text="${error}"></p>
+                </div>
+            </div>
+
+            <div th:if="${exito}!=null" class="card text-white bg-success mb-3" style="max-width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Éxito</h5>
+                  <p class="card-text" th:text="${exito}"></p>
+                </div>
+            </div>
+            <!--Aviso de errores y exito- final-->
+    <div class="container__error">
+      <div class="popup">
+        <img src="/img/error.png">
+        <h2>¡Su registro no se pudo completar!</h2>
+        <p>Sus datos NO han sido enviados con exito. ¡Recorda colocar bien las contraseñas!</p>
+        <a th:href="@{/registrar}">Volver a registrarse</a>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

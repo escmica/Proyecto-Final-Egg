@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="utf-8">
+    <title>Formulario de Servicio</title>
+    <link rel="stylesheet" href="/css/styleModuloUsuario.css">
+
+</head>
+
+<body>
+
+
+
+    <main class="main__login">
+
+        <form class="form" th:action="@{/servicio/editar/__${servicio.id}__}" method="POST">
+            <input hidden th:value="${id}" name="id">
+            <div>
+                <p class="parrafo" th:if="${session.usuariosession != null}"
+                    th:text=" 'Hola de vuelta '+ ${session.usuariosession.nombre} "></p>
+            </div>
+            <h2 class="form__title">Modificar solicitud de Servicio</h2>
+
+            <div class="form__container">
+                <div class="form-group">
+                    <input th:value="${servicio.descripcion}" class="form-input" type="text" name="descripcion"></input>
+                    <span class="form__line"></span>
+                </div>
+
+                <input type="submit" class="form__submit" value="Modificargi  Servicio">
+            </div>
+
+        </form>
+
+    </main>
+
+</body>
+
+</html>

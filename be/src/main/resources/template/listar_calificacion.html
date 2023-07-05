@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de usuarios</title>
+    <link rel="stylesheet" href="/css/styleListarUsuario.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+
+    <body>
+        <header th:replace="fragments/navbar"></header>
+    </body>
+
+    <main class="main__listar1">
+        <div class="div__listar">
+            <div class="table__header">
+                <p>Calificaciones</p>
+            </div>
+            <div class="table__section">
+                <table class="table__listar">
+                    <thead class="thead__listar">
+                        <tr>
+                            <th class="th__listar">Nombre</th>
+                            <th class="th__listar">Descripcion</th>
+                            <th class="th__listar">Servicio</th>
+                            <th class="th__listar">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody th:each="user : ${servicios}">
+                        <tr class="tr__listar">
+                            <td class="td__listar" th:text="${user.proveedor.nombre}"></td>
+                            <td class="td__listar" th:text="${user.descripcion}"></td>
+                            <td class="td__listar" th:text="${user.proveedor.profesion}"></td>
+                            <td class="td__listar"> 
+                                <button class="btn__listar"><a class="a__listar" th:href="@{/calificacion/resenia/__${user.calificacion.id}__}">Calificar</a></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://kit.fontawesome.com/6da589b235.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

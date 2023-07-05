@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="utf-8">
+    <title>Formulario de Registro</title>
+    <link rel="stylesheet" href="/css/styleModuloUsuario.css">
+
+</head>
+
+<body>
+
+    <body>
+        <header th:replace="fragments/navbar"></header>
+    </body>
+
+    <main class="main__login">
+        <form class="form" th:action="@{/admin/editarSoli/__${usuario.id}__}" method="POST" id="registro__form" enctype="multipart/form-data">
+            <h2 class="form__title">Editar Usuario</h2>
+            <input hidden th:value= "${id}" name="id">
+            <div class="form__container">
+                <div class="form__group">
+                    <input type="text" th:field="${usuario.nombre}" id="name" class="form__input" name="nombre" placeholder=" " required>
+                    <label for="name" class="form__label">Nombre</label>
+                    <span class="form__line"></span>
+                </div>
+                
+                <div class="form__group">
+                    <input type="text" th:field="${usuario.apellido}" id="apellido" class="form__input" name="apellido" placeholder=" " required>
+                    <label for="apellido" class="form__label">Apellido</label>
+                    <span class="form__line"></span>
+                </div>
+
+                <div class="form__group">
+                    <input type="email" th:field="${usuario.email}" id="correo" class="form__input" name="email" placeholder=" " required>
+                    <label for="correo" class="form__label">Correo</label>
+                    <span class="form__line"></span>
+                </div>
+                
+                <div class="form__group">
+                    <input type="file"  class="form__input" name="archivo">
+                    <label for="correo" class="form__label">Imagen del perfil</label>
+                    <span class="form__line"></span>
+                </div>
+
+
+
+                <input type="submit" class="form__submit" value="Editar Usuario">
+            </div>
+
+        </form>
+
+    </main>  
+
+</body>
+
+</html>

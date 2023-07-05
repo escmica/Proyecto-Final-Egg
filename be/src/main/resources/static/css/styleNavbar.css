@@ -1,0 +1,270 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none !important;
+  }
+  
+  :root {
+    --bg-color: #1d3557;
+    --text-color: #fff;
+    --main-color: #f1faee;
+  }
+  
+  .li__nav {
+    list-style: none;
+  }
+  
+  .a__nav {
+    text-decoration: none !important;
+  }
+  
+  .header__nav {
+    font-family: "Poppins", sans-serif;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent;
+    padding: 12px 5%;
+    background-color: var(--bg-color);
+    transition: all 0.5s ease;
+  
+    box-shadow: 5px 5px 15px gray;
+  }
+  
+  .logo__nav {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo__nav i {
+    color: var(--main-color);
+    font-size: 28px;
+    margin-right: 3px;
+  }
+  
+  .logo__nav span {
+    color: var(--text-color);
+    font-size: 1.7rem;
+    font-weight: 600;
+  }
+  
+  .navbar {
+    display: flex;
+    margin-bottom: 0px;
+  }
+  
+  .navbar a {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    padding: 5px 0;
+    margin: 0px 30px;
+    transition: all 0.5s ease;
+  }
+  
+  .navbar a:hover {
+    color: var(--main-color);
+  }
+  
+  .navbar a.active {
+    color: var(--main-color);
+  }
+  
+  .main__nav {
+    display: flex;
+    align-items: center;
+  }
+  
+  .main__nav a {
+    margin-right: 25px;
+    margin-left: 10px;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.5s ease;
+  }
+  
+  .user__nav {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user__nav i {
+    color: var(--main-color);
+    font-size: 23px;
+    margin-right: 7px;
+  }
+  
+  .main__nav a:hover {
+    color: var(--main-color);
+  }
+  
+  #menu-icon {
+    font-size: 35px;
+    color: var(--text-color);
+    cursor: pointer;
+    z-index: 10001;
+    display: none;
+  }
+  
+  /* DROPDOWN MENU */
+  
+  .nav__nav {
+    background: var(--bg-color);
+    width: 100%;
+    padding: 1px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+  }
+  
+  .user__pic {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 30px;
+  }
+  
+  .sub__menu__wrap {
+    position: absolute;
+    top: 100%;
+    right: 10%;
+    width: 320px;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.5s;
+  }
+  
+  .sub__menu__wrap.open__menu {
+    max-height: 400px;
+  }
+  
+  .sub__menu {
+    background-color: #fff;
+    padding: 20px;
+    margin: 10px;
+  }
+  
+  .user__info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user__info h2 {
+    font-weight: 500 !important;
+  }
+  
+  .user__info img {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  
+  .sub__menu hr {
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background: #ccc;
+    margin: 15px 0 10px;
+  }
+  
+  .sub__menu__link {
+    display: flex;
+    align-items: center !important;
+    text-decoration: none;
+    color: #525252;
+    margin: 12px 0;
+  }
+  
+  .sub__menu__link p {
+    width: 100%;
+    color: #525252;
+    align-items: center !important;
+  }
+  
+  .sub__menu__link img {
+    width: 40px;
+    background: #e5e5e5;
+    border-radius: 50%;
+    padding: 8px;
+    margin-right: 15px;
+  }
+  
+  .sub__menu__link span {
+    font-size: 22px;
+    transition: transform 0.5s;
+  }
+  
+  .sub__menu__link span i {
+    color: #525252;
+  }
+  
+  .sub__menu__link:hover span {
+    transform: translateX(5px);
+  }
+  
+  .sub__menu__link:hover p {
+    font-weight: 600;
+  }
+  
+  /* DROPDOWN MENU */
+  
+  @media (max-width: 1280px) {
+    .header__nav {
+      padding: 14px 2%;
+      transition: 0.2s;
+    }
+  
+    .navbar a {
+      padding: 5px 0;
+      margin: 0px 20px;
+    }
+  }
+  
+  @media (max-width: 1090px) {
+    #menu-icon {
+      display: block;
+    }
+  
+    .navbar {
+      position: absolute;
+      top: 100%;
+      right: -100%;
+      width: 270px;
+      height: 29vh;
+      background: var(--main-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      border-radius: 10px;
+      transition: all 0.5s ease;
+    }
+  
+    .navbar a {
+      display: block;
+      margin: 12px 0;
+      padding: 0px 25px;
+      transition: all 0.5s ease;
+    }
+  
+    .navbar a:hover {
+      color: var(--text-color);
+      transform: translateY(5px);
+    }
+  
+    .navbar a.active {
+      color: var(--text-color);
+    }
+  
+    .navbar.open {
+      right: 2%;
+    }
+  }

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styleIndex.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/font-awesome/5.15.1/css/all.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/6da589b235.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <title>INICIO</title>
+  </head>
+
+  <body>
+    <body>
+      <header th:replace="fragments/navbar"></header>
+    </body>
+
+    <main class="body">
+      <div class="avisos">
+      <!--Aviso de errores y exito- comienzo-->
+      <div th:if="${error}!=null" class="error">
+        <div class="card-body">
+          <h5 class="card-title">Error !!!</h5>
+          <p class="card-text" th:text="${error}"></p>
+        </div>
+      </div>
+
+      <div th:if="${exito}!=null" class="exito">
+        <div class="card-body">
+          <h5 class="card-title">Éxito</h5>
+          <p class="card-text" th:text="${exito}"></p>
+        </div>
+      </div>
+    </div>
+      <!--Aviso de errores y exito- final--> 
+      <header class="content header" id="Inicio">
+        <div>
+          <img class="logo" src="/img/logo.png" alt="logo" />
+        </div>
+        <div>
+          <p class="parrafo">
+            Si estás buscando un Servicio para tu casa, tenemos varios Servicios
+            para ofrecerte.
+            <br />
+            Si sos prestador de Servicios, con nosotros vas a poder ofrecer y
+            prestar tu Servicio.
+          </p>
+          <div th:if="${session.usuariosession == null}">
+            <p class="parrafo">
+              Si todavía no tenes cuenta, regístrate acá, es gratis.
+            </p>
+            <a th:href="@{/registrar}">
+              <button type="button" class="button">Regístrate!</button>
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <section class="content nosotros" id="Nosotros">
+        <div>
+          <h2 class="title">¿Quienes somos?</h2>
+          <p class="parrafo">
+            En HomeRepair, llevamos ofreciendo servicios de reparaciones del
+            hogar durante más de 2 años. Nos enorgullece ofrecer un servicio de
+            alta calidad y brindar soluciones duraderas para los problemas de
+            nuestros clientes.
+            <br /><br />
+            Nuestro equipo está formado por expertos en Albañileria,
+            Carpinteria, Limpieza, Herreria, Jardineria y Plomeria. Nos
+            aseguramos de que nuestros miembros del equipo tengan la formación y
+            la experiencia necesarias para brindar servicios de alta calidad y
+            cumplir con los requisitos de seguridad.
+            <br /><br />
+            En HomeRepair, nuestra misión es proporcionar soluciones de
+            reparación del hogar fiables y de alta calidad a nuestros clientes.
+            Nos esforzamos por garantizar la satisfacción de nuestros clientes y
+            trabajar en estrecha colaboración con ellos para entender sus
+            necesidades y ofrecer las soluciones que mejor se adapten a su
+            presupuesto y plazos.
+            <br /><br />
+            Nos enorgullecemos de ser una empresa responsable y comprometida con
+            nuestros valores. Creemos en la integridad, la honestidad y la
+            transparencia en todas nuestras interacciones con los clientes y la
+            comunidad en general. Esperamos poder ayudarte con tus necesidades
+            de reparación del hogar
+          </p>
+        </div>
+      </section>
+
+      <section class="content services" id="Servicios">
+        <div class="box-container">
+          <h2 class="title">Nuestros Servicios</h2>
+
+          <p class="parrafo">
+            En esta sección vas a poder encontrar cualquier servicio que se
+            adecue a tus necesidades.
+          </p>
+
+          <section class="section">
+            <img
+              class="img"
+              src="/img/albañilería.jpg"
+              alt="albañileria"
+              onclick="abanileria()"
+              id="albanileria"
+            />
+
+            <img
+              class="img"
+              src="/img/carpintería.jpg"
+              alt="carpinteria"
+              onclick="carpinteria()"
+              id="carpinteria"
+            />
+
+            <img
+              class="img"
+              src="/img/limpieza.jpg"
+              alt="limpieza"
+              onclick="limpieza()"
+              id="limpieza"
+            />
+
+            <img
+              class="img"
+              src="/img/herrería.jpg"
+              alt="herreria"
+              onclick="herreria()"
+              id="herreria"
+            />
+
+            <img
+              class="img"
+              src="/img/jardinería.jpg"
+              alt="jardineria"
+              onclick="jardineria()"
+              id="jardineria"
+            />
+
+            <img
+              class="img"
+              src="/img/plomería.jpg"
+              alt="plomeria"
+              onclick="plomeria()"
+              id="plomeria"
+            />
+          </section>
+        </div>
+      </section>
+
+      <footer>
+        <small
+          >&copy; 2023 <b>Empresa</b> - Todos los Derechos Reservados.</small
+        >
+      </footer>
+    </main>
+
+    <!-- JS -->
+
+    <!-- script que se ejecuta si el usuario NO esta logueado  -->
+
+    <script th:if="${session.usuariosession == null}">
+      const img1 = document.getElementById("albanileria");
+
+      img1.addEventListener("click", () => {
+        alert("Debe estar logueado para acceder a la lista de proveedores");
+        window.location.href = "/login";
+      });
+
+      const img2 = document.getElementById("carpinteria");
+
+      img2.addEventListener("click", () => {
+        alert("Debe estar logueado para acceder a la lista de proveedores");
+        window.location.href = "/login";
+      });
+
+      const img3 = document.getElementById("limpieza");
+
+      img3.addEventListener("click", () => {
+        alert("Debe estar logueado para acceder a la lista de proveedores");
+        window.location.href = "/login";
+      });
+
+      const img4 = document.getElementById("herreria");
+
+      img4.addEventListener("click", () => {
+        alert("Debe estar logueado para acceder a la lista de proveedores");
+        window.location.href = "/login";
+      });
+
+      const img5 = document.getElementById("jardineria");
+
+      img5.addEventListener("click", () => {
+        alert("Debe estar logueado para acceder a la lista de proveedores");
+        window.location.href = "/login";
+      });
+
+      const img6 = document.getElementById("plomeria");
+
+      img6.addEventListener("click", () => {
+        alert("Debe estar logueado para acceder a la lista de proveedores");
+        window.location.href = "/login";
+      });
+    </script>
+
+    <!-- script que se ejecuta sii el usuario esta logueado -->
+
+    <script th:if="${session.usuariosession != null}">
+      img1 = document.getElementById("albanileria");
+
+      img1.addEventListener("click", () => {
+        window.location.href = "/albanileria";
+      });
+
+      img2 = document.getElementById("carpinteria");
+
+      img2.addEventListener("click", () => {
+        window.location.href = "/carpinteria";
+      });
+
+      img3 = document.getElementById("limpieza");
+
+      img3.addEventListener("click", () => {
+        window.location.href = "/limpieza";
+      });
+
+      img4 = document.getElementById("herreria");
+
+      img4.addEventListener("click", () => {
+        window.location.href = "/herreria";
+      });
+
+      img5 = document.getElementById("jardineria");
+
+      img5.addEventListener("click", () => {
+        window.location.href = "/jardineria";
+      });
+
+      img6 = document.getElementById("plomeria");
+
+      img6.addEventListener("click", () => {
+        window.location.href = "/plomeria";
+      });
+    </script>
+
+</body>
+
+</html>

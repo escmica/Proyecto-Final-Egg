@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Solicitudes</title>
+    <link rel="stylesheet" href="/css/styleListarUsuario.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+  <body>
+    <body>
+      <header th:replace="fragments/navbar"></header>
+    </body>
+
+    <main class="main__listar1">
+        <div class="div__listar">
+            <div class="table__header">
+                <p>Lista de Solicitudes</p>
+            </div>
+            <div class="table__section">
+                <table class="table__listar">
+                    <thead class="thead__listar">
+                        <tr>
+                            <th class="th__listar">Nombre</th>
+                            <th class="th__listar">Descripcion</th>
+                            <th class="th__listar">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody th:each="user : ${servicios}">
+                        <tr class="tr__listar">
+                            <td class="td__listar" th:text="${user.solicitante.nombre}"></td>
+                            <td class="td__listar" th:text="${user.descripcion}"></td>
+                            <td class="td__listar">
+                                <form th:action="@{/servicio/aceptar/__${user.id}__}" method="post">
+                                    <button class="btn__listar" type="submit">
+                                        Aceptar
+                                    </button>
+                                </form>
+                                <form th:action="@{/servicio/rechazar/__${user.id}__}" method="post">
+                                    <button class="btn__listar" type="submit">
+                                        Rechazar
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script
+      src="https://kit.fontawesome.com/6da589b235.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
